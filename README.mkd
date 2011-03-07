@@ -1,0 +1,12 @@
+BullionVault Ruby Gem
+====================
+A Ruby wrapper for the BullionVault XML API
+
+Installation
+------------
+    gem install bullion_vault
+
+Copyright
+---------
+Copyright (c) 2011 William T Nelson
+See [BSD-LICENSE](https://github.com/wtn/bullion_vault/blob/master/BSD-LICENSE) for details.
