@@ -8,5 +8,4 @@ Installation
 
 Copyright
 ---------
-Copyright (c) 2011 William T Nelson
-See [BSD-LICENSE](https://github.com/wtn/bullion_vault/blob/master/BSD-LICENSE) for details.
+Copyright (c) 2010-2011 William T Nelson, John Nunemaker, Wynn Netherland, Erik Michaels-Ober, Steve Richert. See [MIT-LICENSE](https://github.com/wtn/bullion_vault/blob/master/MIT-LICENSE) for details.
