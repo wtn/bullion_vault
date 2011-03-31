@@ -1,0 +1,32 @@
+--- 
+envelope: 
+  message: 
+    clientBalance: 
+      clientPositions: 
+        clientPosition: 
+        - securityId: USD
+          available: "101"
+          total: "101"
+          classNarrative: CURRENCY
+          totalValuation: "101"
+          valuationCurrency: USD
+        - securityId: GBP
+          available: "1"
+          total: "1"
+          classNarrative: CURRENCY
+          totalValuation: "1.61"
+          valuationCurrency: USD
+        - securityId: EUR
+          available: "1"
+          total: "1"
+          classNarrative: CURRENCY
+          totalValuation: "1.43"
+          valuationCurrency: USD
+        - securityId: AUXZU
+          available: "0.001"
+          total: "0.001"
+          classNarrative: GOLD
+          totalValuation: "45.95"
+          valuationCurrency: USD
+    type: CLIENT_BALANCE_A
+    version: "0.2"
