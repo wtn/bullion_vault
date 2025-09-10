@@ -2,12 +2,13 @@
 require File.expand_path('../lib/bullion_vault/version', __FILE__)
 
 Gem::Specification.new do |s|
-  s.add_development_dependency('rspec', '~> 2.5.0')
-  s.add_development_dependency('webmock', '~> 1.6.2')
-  s.add_development_dependency('rake', '~> 0.8.7')
-  s.add_runtime_dependency('faraday_middleware', '~> 0.3.2')
-  s.add_runtime_dependency('multi_xml', '~> 0.2.1')
-  s.add_runtime_dependency('hashie', '~> 1.0.0')
+  s.add_development_dependency('rspec')
+  s.add_development_dependency('webmock')
+  s.add_development_dependency('rake')
+  s.add_runtime_dependency('faraday', '~> 1.10.4')
+  s.add_runtime_dependency('faraday_middleware', '~> 1.2.1')
+  s.add_runtime_dependency('multi_xml')
+  s.add_runtime_dependency('hashie')
 
   s.name = 'bullion_vault'
   s.version = BullionVault::VERSION.dup
