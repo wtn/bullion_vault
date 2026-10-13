@@ -1,28 +1,30 @@
-require 'faraday_middleware'
+require 'faraday'
 Dir[File.expand_path('../../faraday/*.rb', __FILE__)].each {|f| require f}
 
 module BullionVault
   module Connection
     private
 
+    # Response middleware runs bottom-up: 5xx check, XML parsing, 4xx and
+    # cookie checks, then Mashify.
     def connection(raw=false)
       options = {
         :headers => {'User-Agent' => user_agent},
         :proxy => proxy,
-        :ssl => {:verify => false},
         :url => api_endpoint,
       }
 
       Faraday::Connection.new(options) do |connection|
+        connection.request :url_encoded
         cookie and connection.use Faraday::Request::CookieAuth, cookie
-        connection.adapter(adapter)
-        connection.use Faraday::Response::RaiseHttp5xx
         parse_xml?(raw).tap do |parse_xml|
-          connection.use Faraday::Response::ParseXml if parse_xml
-          connection.use Faraday::Response::RaiseHttp4xx
-          cookie and connection.use Faraday::Response::RaiseInvalidCookie
           connection.use Faraday::Response::Mashify if parse_xml
+          cookie and connection.use Faraday::Response::RaiseInvalidCookie
+          connection.use Faraday::Response::RaiseHttp4xx
+          connection.use Faraday::Response::ParseXml if parse_xml
         end
+        connection.use Faraday::Response::RaiseHttp5xx
+        connection.adapter(adapter)
       end
     end
 

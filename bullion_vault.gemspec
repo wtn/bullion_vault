@@ -1,28 +1,29 @@
-# -*- encoding: utf-8 -*-
-require File.expand_path('../lib/bullion_vault/version', __FILE__)
+require_relative "lib/bullion_vault/version"
 
-Gem::Specification.new do |s|
-  s.add_development_dependency('rspec')
-  s.add_development_dependency('webmock')
-  s.add_development_dependency('rake')
-  s.add_runtime_dependency('faraday', '~> 1.10.4')
-  s.add_runtime_dependency('faraday_middleware', '~> 1.2.1')
-  s.add_runtime_dependency('multi_xml')
-  s.add_runtime_dependency('hashie')
+Gem::Specification.new do |spec|
+  spec.name = "bullion_vault"
+  spec.version = BullionVault::VERSION
+  spec.authors = ["William T. Nelson"]
+  spec.email = ["35801+wtn@users.noreply.github.com"]
 
-  s.name = 'bullion_vault'
-  s.version = BullionVault::VERSION.dup
-  s.summary = %q{A Ruby wrapper for the BullionVault XML API}
-  s.description = %q{A Ruby wrapper for the BullionVault XML API}
-  s.homepage = 'https://github.com/wtn/bullion_vault'
-  s.authors = ['William T. Nelson']
-  s.email = ['35801+wtn@users.noreply.github.com']
-  s.post_install_message = nil
-  s.rubyforge_project = nil
-  s.platform = Gem::Platform::RUBY
-  s.files = `git ls-files`.split("\n")
-  s.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ['lib']
-  s.required_rubygems_version = Gem::Requirement.new('>= 1.3.6') if s.respond_to?(:required_rubygems_version=)
-  s.test_files = `git ls-files -- {spec}/*`.split("\n")
+  spec.summary = "A Ruby wrapper for the BullionVault XML API"
+  spec.homepage = "https://github.com/wtn/bullion_vault"
+  spec.license = "MIT"
+  spec.required_ruby_version = ">= 3.2.0"
+
+  gemspec = File.basename(__FILE__)
+  spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
+    ls.readlines("\x0", chomp: true).reject do |f|
+      (f == gemspec) ||
+        f.start_with?(*%w[bin/ Gemfile .gitignore test/])
+    end
+  end
+  spec.bindir = "exe"
+  spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
+  spec.require_paths = ["lib"]
+
+  spec.add_dependency('faraday', '~> 2.12')
+  spec.add_dependency('multi_xml', '~> 0.9')
+  spec.add_dependency('rexml', '~> 3.3')
+  spec.add_dependency('hashie', '~> 5.0')
 end

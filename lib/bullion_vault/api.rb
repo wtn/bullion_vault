@@ -4,7 +4,7 @@ require File.expand_path('../authentication', __FILE__)
 
 module BullionVault
   class API
-    attr_accessor *Configuration::VALID_OPTIONS_KEYS
+    attr_accessor(*Configuration::VALID_OPTIONS_KEYS)
 
     # Creates a new API
     def initialize(options={})

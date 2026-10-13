@@ -2,13 +2,13 @@ require 'faraday'
 
 module Faraday
   class Request::CookieAuth < Faraday::Middleware
-    def call(env)
-      env[:request_headers]['Cookie'] = @cookie
-      @app.call(env)
+    def initialize(app, cookie)
+      super(app)
+      @cookie = cookie
     end
 
-    def initialize(app, cookie)
-      @app, @cookie = app, cookie
+    def on_request(env)
+      env[:request_headers]['Cookie'] = @cookie
     end
   end
 end

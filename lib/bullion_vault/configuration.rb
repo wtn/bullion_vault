@@ -27,7 +27,7 @@ module BullionVault
     DEFAULT_COOKIE = nil
     DEFAULT_USER_AGENT = "BullionVault Ruby Gem #{BullionVault::VERSION}".freeze
 
-    attr_accessor *VALID_OPTIONS_KEYS
+    attr_accessor(*VALID_OPTIONS_KEYS)
 
     # When this module is extended, set all configuration options to their default values
     def self.extended(base)
